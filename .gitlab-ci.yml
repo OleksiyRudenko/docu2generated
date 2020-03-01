@@ -1,0 +1,28 @@
+image: node:9.11.1
+
+pages:
+  cache:
+    paths:
+      - node_modules/
+      - .yarn
+
+  stage: deploy
+  script:
+    - echo "Building from updated master and publishing"
+    - yarn install
+    - yarn build
+  artifacts:
+    paths:
+      - build
+  only:
+    - master
+
+static-pages:
+  stage: deploy
+  script:
+    - echo "Publishing updated gh-pages branch"
+  artifacts:
+    paths:
+      - .
+  only:
+    - gh-pages
