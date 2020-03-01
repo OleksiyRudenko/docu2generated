@@ -1,0 +1,17 @@
+{
+  "name": "docu2generated",
+  "version": "1.0.0",
+  "description": "External generated content",
+  "main": "",
+  "repository": "https://github.com/OleksiyRudenko/docu2generated.git",
+  "author": "OleksiyRudenko <oleksiy.rudenko@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "(IF NOT EXIST build MKDIR build) && cp ./src/* ./build",
+    "deploy": "push-dir --dir=build --branch=gh-pages --cleanup"
+  },
+  "devDependencies": {
+    "push-dir": "^0.4.1"
+  }
+}
