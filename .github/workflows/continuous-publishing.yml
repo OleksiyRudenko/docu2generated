@@ -18,14 +18,14 @@ jobs:
       - name: Detect yarn cache location
         shell: bash
         run: |
-          yarn-cache-dir=`yarn cache dir`
+          yarn_cache_dir=`yarn cache dir`
       - name: Set up workflow caching for yarn cache
         uses: actions/cache@v1
         env:
           cache-name: cache-node-modules
         with:
-          path: ${{ yarn-cache-dir }}
-          key: ${{ runner-os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+          path: $yarn_cache_dir
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
