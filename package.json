@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "(IF NOT EXIST build MKDIR build) && cp ./src/* ./build",
+    "build": "( [ -d build ] || mkdir build) && cp ./src/* ./build",
     "deploy": "push-dir --dir=build --branch=gh-pages --cleanup"
   },
   "devDependencies": {

@@ -1,0 +1,29 @@
+name: Build and Publish Content On Every master update
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'src/**'
+
+jobs:
+  build:
+    name: Build and Publish content
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull source code
+        uses: actions/checkout@v2
+        with:
+          path: './'
+      - name: Install dependencies
+        run: yarn
+      - name: Build content
+        shell: bash
+        run: yarn run build
+      - name: Setup git creds
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git config --local user.password ${{ secrets.GITHUB_TOKEN }}
+      - name: Push content to gh-pages
+        run: yarn run deploy
