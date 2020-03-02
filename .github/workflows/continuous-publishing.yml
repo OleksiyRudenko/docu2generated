@@ -20,16 +20,13 @@ jobs:
         shell: bash
         run: |
           yarn_cache_dir=`yarn cache dir`
-          echo "::set-output name=yarn_cache_dir::$yarn_cache_dir"
-        outputs:
-          yarn_cache_dir:
-            description: 'yarn cache location'
+          echo "::set-env name=yarn_cache_dir::$yarn_cache_dir"
       - name: Set up workflow caching for yarn cache
         uses: actions/cache@v1
         env:
           cache-name: cache-node-modules
         with:
-          path: ${{ steps.yarn_cache.outputs.yarn_cache_dir }}
+          path: ${{ env.yarn_cache_dir }}
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
